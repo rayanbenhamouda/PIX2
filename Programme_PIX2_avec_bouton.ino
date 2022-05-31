@@ -21,7 +21,7 @@ const int secoue_bille = 20;
 const int validate = 21;
 
 //------------------------------------------ taille du tableau 
-const int taille = 5;
+const int taille = 10;
 int arrayOne[taille] = {} ;
 
 // Afichage 
@@ -31,7 +31,7 @@ int digit1 = A1;
 int digit2 = A2;
 int digit3 = A3;
 int digit4 = A4;
-
+/*
 int A = 31;
 int B = 32;
 int C = 35;
@@ -41,7 +41,16 @@ int F = 30;
 int G = 33;
 
 int dp = 34;
+*/
+int A = 31;
+int B = 34;
+int C = 33;
+int D = 32;
+int E = 37;
+int F = 35;
+int G = 36;
 
+int dp = 30;
 
 // Variable utilisateur
 volatile byte state1 = 0;
@@ -77,6 +86,9 @@ void setup() {
   digitalWrite(digit3, HIGH);
   digitalWrite(digit4, HIGH);
   
+  myservo3.write(90);
+  myservo2.write(90);
+  myservo3.write(0);
   Serial.begin(9600);
 }
 //---------------------------------------------------------------------------------------Main Function
@@ -141,7 +153,8 @@ void loop() {
     state1 = 0;
   }
   setAfficheur(taille-compteur);
-  //setAfficheur(1234);
+  //  setAfficheur(8888);
+  //afficheDemo();
 }
 //---------------------------------------------------------------------------------------Other Function
 //----------------------------------------Interupt Function
@@ -166,7 +179,7 @@ void boutonpress6(){
 //----------------------------------------music Function
 //----------------------gratter boite de conserve
 void gratter(){
-  myservo1.write(50 );
+  myservo1.write(50);
   delay(1000);
   myservo1.write(90);
 }
@@ -193,18 +206,23 @@ void secouer(){
   myservo3.write(0);
   delay(1000);
   myservo3.write(180);
-  delay(1100);
+  delay(1000);
   myservo3.write(0);
-  delay(1100);
-  myservo3.write(90);
+  delay(1000);
+  myservo3.write(180);
+  delay(1000);
+  myservo3.write(0);
   delay(1000);
 }
 //----------------------repete 
 void repeat(){
   int test = 0;
   for(int i=0;i<taille;i++){
+    /*compteur-=1;
+    setAfficheur(taille-compteur);*/
     if(arrayOne[0]==0){
        test = 1;
+       afficheTest();
     }
     if(test==1){
       arrayOne[i]=random(1,6);
@@ -391,4 +409,62 @@ void setAfficheur(int nombre) {
   delay(2);
   setDigit(1, M) ;
   delay(2);
+}
+
+void afficheTest(){
+   digitalWrite(digit1, HIGH) ;
+  digitalWrite(digit2, HIGH) ;
+  digitalWrite(digit3, HIGH) ;
+  digitalWrite(digit4, LOW) ;
+  digitalWrite(A, 0);
+  digitalWrite(B, 0);
+  digitalWrite(C, 0);
+  digitalWrite(D, 1);
+  digitalWrite(E, 1);
+  digitalWrite(F, 1);
+  digitalWrite(G, 1);
+  delay(20);
+   digitalWrite(digit1, HIGH) ;
+  digitalWrite(digit2, HIGH) ;
+  digitalWrite(digit3, LOW) ;
+  digitalWrite(digit4, HIGH) ;
+  digitalWrite(A, 1);
+  digitalWrite(B, 0);
+  digitalWrite(C, 1);
+  digitalWrite(D, 1);
+  digitalWrite(E, 0);
+  digitalWrite(F, 1);
+  digitalWrite(G, 1);
+   delay(20);
+  digitalWrite(digit1, HIGH) ;
+  digitalWrite(digit2, LOW) ;
+  digitalWrite(digit3, HIGH) ;
+  digitalWrite(digit4, HIGH) ;
+  digitalWrite(A, 1);
+  digitalWrite(B, 1);
+  digitalWrite(C, 0);
+  digitalWrite(D, 1);
+  digitalWrite(E, 1);
+  digitalWrite(F, 1);
+  digitalWrite(G, 1);
+   delay(20);
+ 
+   digitalWrite(digit1, LOW) ;
+  digitalWrite(digit2, HIGH) ;
+  digitalWrite(digit3, HIGH) ;
+  digitalWrite(digit4, HIGH) ;
+  digitalWrite(A, 0);
+  digitalWrite(B, 0);
+  digitalWrite(C, 0);
+  digitalWrite(D, 1);
+  digitalWrite(E, 1);
+  digitalWrite(F, 1);
+  digitalWrite(G, 1);
+  delay(20);
+  digitalWrite(digit1, LOW) ;
+  digitalWrite(digit2, LOW) ;
+  digitalWrite(digit3, LOW) ;
+  digitalWrite(digit4, LOW) ;
+ 
+  
 }
